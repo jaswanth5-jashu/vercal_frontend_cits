@@ -89,10 +89,23 @@ export default function Hackathon() {
   e.preventDefault();
 
   const payload = {
-    teamName,
-    leader,
-    members,
-    totalParticipants: 1 + members.length,
+    team_name: teamName,
+    leader: {
+      full_name: leader.fullName,
+      email: leader.email,
+      phone: leader.phone,
+      branch: leader.branch,
+      section: leader.section,
+      year: leader.year,
+    },
+    members: members.map(m => ({
+      full_name: m.fullName,
+      email: m.email,
+      phone: m.phone,
+      branch: m.branch,
+      section: m.section,
+      year: m.year,
+    })),
   };
 
   try {
@@ -116,6 +129,7 @@ export default function Hackathon() {
     alert("Registration failed");
   }
 };
+
   return (
     <div className="hackathon-page">
       {/* ================= HERO ================= */}
