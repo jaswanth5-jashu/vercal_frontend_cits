@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import "../css/hackathon.css";
+import "../css/Hackathon.css";
 
 const MAX_MEMBERS = 6;
 
