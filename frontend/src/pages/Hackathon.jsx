@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
-import { registerHackathon } from "../services/hackathonapi";
 import { NavLink } from "react-router-dom";
-import "../css/Hackathon.css";
+import "../css/hackathon.css";
 
 const MAX_MEMBERS = 6;
 
@@ -85,47 +84,19 @@ export default function Hackathon() {
     );
   };
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const payload = {
-    teamName: teamName,
-    leader: {
-      fullName: leader.fullName,
-      email: leader.email,
-      phone: leader.phone,
-      branch: leader.branch,
-      section: leader.section,
-      year: leader.year,
-    },
-    members: members.map(m => ({
-      fullName: m.fullName,
-      email: m.email,
-      phone: m.phone,
-      branch: m.branch,
-      section: m.section,
-      year: m.year,
-    })),
+    const payload = {
+      teamName,
+      leader,
+      members,
+      totalParticipants: 1 + members.length,
+    };
+
+    console.log("Registration Payload:", payload);
+    alert("Registered! (Check console for payload)");
   };
-
-  try {
-    await registerHackathon(payload);
-    alert("Registration Successful!");
-    setTeamName("");
-    setLeader({
-      fullName: "",
-      email: "",
-      phone: "",
-      branch: "",
-      section: "",
-      year: "",
-    });
-    setMembers([]);
-  } catch (err) {
-    console.error(err);
-    alert("Registration failed");
-  }
-};
 
   return (
     <div className="hackathon-page">
