@@ -89,9 +89,9 @@ export default function Hackathon() {
   e.preventDefault();
 
   const payload = {
-    team_name: teamName,
+    teamName: teamName,
     leader: {
-      full_name: leader.fullName,
+      fullName: leader.fullName,
       email: leader.email,
       phone: leader.phone,
       branch: leader.branch,
@@ -99,7 +99,7 @@ export default function Hackathon() {
       year: leader.year,
     },
     members: members.map(m => ({
-      full_name: m.fullName,
+      fullName: m.fullName,
       email: m.email,
       phone: m.phone,
       branch: m.branch,
@@ -110,9 +110,7 @@ export default function Hackathon() {
 
   try {
     await registerHackathon(payload);
-
     alert("Registration Successful!");
-
     setTeamName("");
     setLeader({
       fullName: "",
@@ -123,7 +121,6 @@ export default function Hackathon() {
       year: "",
     });
     setMembers([]);
-
   } catch (err) {
     console.error(err);
     alert("Registration failed");

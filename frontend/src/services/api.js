@@ -11,10 +11,17 @@ export const apiRequest = async (endpoint, options = {}) => {
     },
   });
 
-  const data = await response.json();
+  // handle empty or invalid JSON safely
+  let data = null;
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
 
   if (!response.ok) {
-    throw data;
+    console.error("API ERROR:", data);
+    throw data || { error: "Request failed" };
   }
 
   return data;
